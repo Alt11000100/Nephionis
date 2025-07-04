@@ -16,7 +16,7 @@ import motor.motor_asyncio
 
 
 
-MONGODB_URL = "mongodb+srv://atlas:8AJXMuMc8UTZCxYf@cluster0.a6bc3hw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+MONGODB_URL = ""
 
 app = FastAPI(
     title="The API",
