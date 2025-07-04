@@ -1,0 +1,19 @@
+# Use minimal Python base image
+FROM python:3.13-alpine
+
+
+
+# Set working directory
+WORKDIR /app
+
+# Copy dependency list first (for build cache)
+COPY queue/requirements.txt .
+
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy your Python script
+COPY queue/receiver.py .
+
+# Run your main script
+#CMD ["python", "receiver.py"]

@@ -1,0 +1,26 @@
+scrape_configs:
+  - job_name: cadvisor
+    scrape_interval: {{ scrape_interval | default("5s") }}
+    static_configs:
+      - targets:
+          - cadvisor:8080
+          
+
+  - job_name: falco
+    scrape_interval: {{ scrape_interval_falco | default("15s") }}
+    static_configs:
+      - targets:
+          - falco:8765
+          
+
+  - job_name: node
+    scrape_interval: {{ scrape_interval_node | default("5s") }}
+    static_configs:
+      - targets: ['node:9100']
+
+
+
+- job_name: 'falcosidekick'
+    scrape_interval: {{ scrape_interval_node | default("5s") }}
+    static_configs:
+      - targets: ['localhost:9154']      

@@ -1,0 +1,9 @@
+- rule: Python Spawning Shell
+  desc: Detect Python running a shell (possible code injection)
+  condition: >
+    spawned_process and
+    proc.name = "python" and
+    proc.cmdline contains "sh"
+  output: "⚠️  Python process spawned shell (user=%user.name command=%proc.cmdline)"
+  priority: WARNING
+  tags: [python, shell, suspicious]

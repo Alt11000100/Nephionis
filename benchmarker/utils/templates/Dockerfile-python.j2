@@ -1,0 +1,23 @@
+FROM python:{{ python_version }}
+
+RUN apt-get update && apt-get install -y \
+time \
+&& \
+apt-get clean && \
+rm -rf /var/lib/apt/lists/*
+
+RUN pip install --upgrade pip
+
+WORKDIR workspace/
+
+{% for key, value in env_vars.items() %}
+ENV {{ key }}="{{ value }}"
+{% endfor %}
+{% for path in paths %}
+COPY {{ path.source }} {{ path.target }}
+{% endfor %}
+
+COPY requirements_benchmarker_docker.txt .
+RUN pip install -q -r requirements_benchmarker_docker.txt
+
+CMD ["python3", "benchmarker.py"]
